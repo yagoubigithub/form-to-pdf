@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"
+        integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="./html2canvas.min.js"></script>
+
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.23/dist/jspdf.plugin.autotable.js"></script>
+
+
+
+
+
+
+
+
+    <script src="./pdfjs/build/pdf.js"></script>
+    <script src="./pdfjs/build/pdf.worker.js"></script>
+
+
+    <link rel="stylesheet" href="style.css">
+    <title>Form</title>
+</head>
+
+<body>
+
+
+   
+
+    <form style="padding-bottom: 7rem;">
+        <div class="container" id="container">
+
+        </div>
+
+
+    </form>
+    <div class="d-grid gap-2" style="position: fixed;bottom: 0;left : 0; right: 0; background-color: white; height: 4rem;
+box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
+        <button class="btn btn-primary" id="submit-btn"> Save</button>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade modal-fullscreen-sm-down modal-fullscreen " id="myModal" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Pdf</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="myPdf">
+
+                        <progress></progress>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+
+
+
+    <script>
+        const data = [
+            {
+                option: "Value of the project",
+
+                file: "Project",
+                values: ["<=200,000", ">200,000=<500,000", ">500,000=<1,000,000", ">1000000=<3000000", ">3,000,000"],
+                scores: [7, 5.5, 4, 2.5, 1],
+                weightings  : [10,7.9,5.7,3.6,1.4]
+            },
+            {
+                option: "Type of the project",
+
+
+                file: "Project",
+                values: ["Government", "Commerical", "Residental"],
+                scores: [5.25, 3.25, 1.15],
+                weightings : [7.5,4.6,1.6]
+            },
+            {
+                option: "Location of the project",
+                file: "Project",
+                values: ["<=50 km from Contrctor", ">50 km =<120 km from Contrctor", ">120 km from Contrctor"],
+                scores: [5.2, 3.25, 1.15],
+                weightings : [7.5,4.6,1.6]
+            },
+            {
+                option: "Timeline of the project",
+
+                file: "Project",
+                values: ["<=30 days", ">30 days =<60 days", ">60 days =<90 days", ">90 days =<120 days", ">120 days"],
+
+                scores: [17.5, 14.5, 11.5, 8.5, 5.5],
+                weightings : [25,20.7,16.4,12.1,7.9]
+            },
+            {
+                option: "*Client/GC/ Project's owner Type",
+
+                file: "Project",
+                values: ["Commerical", "Residental", "Semi-Government", "Government", "Politician (VIP)"],
+                scores: [10.5, 8.5, 6.5, 4.5, 2.5],
+                weightings : [15,12.1,9.3,6.4,3.6]
+            },
+            {
+                option: "*Client/GC/ Project's owner Size",
+
+                file: "Project",
+                values: ["Very Large", "Large", "Medium", "Small", "Micro-Small"],
+                scores: [10.5, 8.5, 6.5, 4.5, 2.5],
+                weightings : [15,12.1,9.3,6.4,3.6]
+            },
+            {
+                option: "*Client/GC/ Project's owner Reputation",
+
+                file: "Project",
+                values: ["High or evident", "Strong", "Good", "Average or reducing", "Questionable or weak"],
+                scores: [14, 11, 7, 4, 1],
+                weightings : [20,15.7,10,5.7,1.4]
+            },
+            {
+                option: "Classification Certificate Grade",
+                values: ["1 or 2", "3 or 4", "5 or 6", "7", "Not applicable"],
+                file: "Business",
+                scores: [7.5, 6, 4.5, 3, 1.5],
+                weightings : [25,20,15,10,5]
+            },
+
+
+            {
+                option: "Experience in the field",
+
+
+                file: "Business",
+                values: ["More than 5 Years", "3-5 Years", "2-3 Years", "1-2 Years", "Less than 1 Year"],
+
+                scores: [10.5, 8.25, 6, 3.75, 1.5],
+                weightings : [35,27.5,20,12.5,5]
+            },
+            {
+                option: "Saudization/Commitment",
+
+
+                file: "Business",
+                values: ["Excellent", "Green", "Not applicable (Mico-Small)", "Yellow", "Red"],
+                scores: [4.5, 3.75, 3, 2.25, 1.5],
+                weightings : [35,27.5,20,12.5,5]
+            },
+
+            {
+                option: "Quality of management",
+
+
+                file: "Business",
+
+
+                values: ["High or evident", "Strong", " Good", "Average or reducing", "Questionable or weak"],
+                scores: [7.5, 6, 4.5, 3, 1.5],
+                weightings : [25,20,15,10,5]
+            },
+
+
+
+        ];
+        for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+
+            const row = document.createElement("div");
+            row.className = "row";
+            row.id = "row-" + i
+            row.innerHTML = `<div  class="col-6">${element.option}</div>
+            
+            <div  class="col-3">Risk Weighting</div>
+            <div  class="col-3">Score</div>
+            `
+
+            const col1 = document.createElement("div");
+            col1.className = "col-6"
+            // col1.innerHTML = `<label class="form-label">${element.option}</label>`
+
+            const select = document.createElement("select")
+            select.className = "form-select";
+            select.innerHTML = "<option>--Select--</select>";
+
+            select.onchange = (event) => handleSelectChange(event, i, 0)
+            element.values.forEach((value, index) => {
+
+                const option = document.createElement("option")
+                option.value = value;
+                option.innerText = value;
+                select.appendChild(option)
+            });
+
+            col1.appendChild(select)
+            const col2 = document.createElement("div");
+            col2.className = "col-3 col2";
+
+
+
+
+            const col3 = document.createElement("div");
+            col3.className = "col-3 col3";
+
+
+            row.append
+                (col1, col2, col3)
+            document.getElementById("container").appendChild(row)
+        }
+
+        let final_data = []
+
+        function handleSelectChange(event, i, colIndex) {
+            const value = event.target.value;
+            const col1 = event.target.parentNode || event.target.parentElement;
+
+
+
+
+            const row = col1.parentNode || col1.parentElement
+
+            const old_col2 = row.getElementsByClassName("col2")[colIndex]
+            const old_col3 = row.getElementsByClassName("col3")[colIndex]
+
+
+
+            const weighting = data[i].weightings[data[i].values.indexOf(value)]
+            old_col2.innerHTML = ` ${weighting} `
+
+
+            const score = data[i].scores[data[i].values.indexOf(value)]
+            old_col3.innerHTML = ` ${score} `
+
+
+            const col2 = document.createElement("div");
+            col2.className = "col-3 col2";
+
+            const col3 = document.createElement("div");
+            col3.className = "col-3 col3";
+
+
+            const cloned_col1 = col1.cloneNode(true);
+            const newColIndex = colIndex + 1
+
+
+            cloned_col1.getElementsByTagName("select")[0].addEventListener("change", (event) => {
+
+                handleSelectChange(event, i, newColIndex)
+            })
+
+            cloned_col1.style.opacity = 0;
+            col2.style.opacity = 0;
+            col3.style.opacity = 0;
+
+            cloned_col1.style.transition = "opacity 0.5s"
+            col2.style.transition = "opacity 0.5s"
+            col3.style.transition = "opacity 0.5s";
+/*
+            row.appendChild(cloned_col1)
+            row.appendChild(col2)
+            row.appendChild(col3)
+            setTimeout(() => {
+                cloned_col1.style.opacity = 1;
+                col2.style.opacity = 1;
+                col3.style.opacity = 1;
+
+                // col2.scrollIntoView()
+            }, 33)
+            */
+
+            final_data[i] = {
+
+                option_title: data[i].option,
+                option: final_data[i] ? [...final_data[i].option, value] : [value],
+                score: final_data[i] ? [...final_data[i].score, score] : [score],
+                weighting: final_data[i] ? [...final_data[i].weighting, weighting] : [weighting],
+
+
+
+            }
+
+
+
+
+        }
+        document.getElementById("submit-btn").addEventListener("click", () => {
+
+            console.log(final_data)
+            const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+                keyboard: false
+            })
+            myModal.show()
+
+            pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+            window.jsPDF = window.jspdf.jsPDF;
+
+            //   window.jsPDF = window.jspdf.jsPDF;
+            const doc = new jsPDF();
+            const iframe = document.createElement("iframe");
+
+            var columns = [{ content: "", colSpan: 3 }, { content: "Options" }, { content: "Risk score" }, { content: "Weighting %" }];
+            let rows = []
+
+
+            final_data.map(data => {
+                let row = ["", "" , {
+                    content: data.option_title,
+                    rowSpan: data.option.length - 1
+                }]
+               
+            
+                data.option.forEach((option, index) => {
+                   
+                    row.push(option,  data.weighting[index], data.score[index])
+                
+                });
+                rows.push(row)
+
+            })
+         
+            doc.autoTable({
+
+
+                head: [columns],
+                body: rows,
+                styles: { overflow: 'linebreak', cellPadding: 1, fontSize: 7, valign: "middle" },
+                theme: "grid"
+            });
+            const blob = doc.output();
+
+            const myblob = new Blob([blob], { type: 'application/javascript' });
+            var url = URL.createObjectURL(myblob);
+            var viewerUrl = './pdfjs/web/viewer.html?file=' + encodeURIComponent(url);
+
+
+            iframe.src = viewerUrl;
+            document.getElementById("myPdf").innerHTML = iframe.outerHTML
+
+        })
+    </script>
+
+
+</body>
+
+</html>
