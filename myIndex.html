@@ -295,9 +295,9 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
             final_data[i] = {
 
                 option_title: data[i].option,
-                option: value,
-                score: score,
-                weighting:weighting,
+                option: final_data[i] ? [...final_data[i].option, value] : [value],
+                score: final_data[i] ? [...final_data[i].score, score] : [score],
+                weighting: final_data[i] ? [...final_data[i].weighting, weighting] : [weighting],
 
 
 
@@ -326,29 +326,22 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
             let rows = []
 
 
-            let totale_score = 0;
-            let totale_weighting = 0;
             final_data.map(data => {
                 let row = ["", "" , {
-                    content: data.option_title
-                },   data.option , data.weighting, data.score ]
+                    content: data.option_title,
+                    rowSpan: data.option.length - 1
+                }]
                
             
-                totale_score+=Number.parseFloat(data.score);
-                totale_weighting+=Number.parseFloat(data.weighting);
-
-              
+                data.option.forEach((option, index) => {
+                   
+                    row.push(option,  data.weighting[index], data.score[index])
+                
+                });
                 rows.push(row)
 
             })
          
-
-            rows.push([{
-                content : "Total",
-                colSpan  : 2,
-                styles: {  fontSize:10, valign: "middle", halign : "middle" }
-            } ,  "", "", totale_weighting,totale_score])
-
             doc.autoTable({
 
 
