@@ -34,21 +34,192 @@
 
 <body>
 
+<nav >
+    <button class="btn btn-primary" id="submit-btn"> Save</button>
+    
+</nav>
 
-   
 
     <form style="padding-bottom: 7rem;">
-        <div class="container" id="container">
+        <div class="container-fluid" >
+            <div class="row">
+                <div class="col-4 card m-2 p-2">
+                    <h5 class="display-3">Company Info</h5>
 
-        </div>
+
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">Name</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Name"
+                                oninput="changeCompanyInfo(event, 'name')">
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <label class="col-4  col-form-label">ID Number</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="ID Number"
+                                oninput="changeCompanyInfo(event, 'id_number')">
+                        </div>
+                    </div>
 
 
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">Issuer</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Issuer"
+                                oninput="changeCompanyInfo(event, 'issuer')">
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">City</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="City"
+                                oninput="changeCompanyInfo(event, 'city')">
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">ID Expiry Date</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="ID Expiry Date"
+                                oninput="changeCompanyInfo(event, 'id_expiry_date')">
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">Legal type</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Legal type"
+                                oninput="changeCompanyInfo(event, 'legal_type')">
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">Date Established</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Date Established"
+                                oninput="changeCompanyInfo(event, 'date_established')">
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">Business Activity</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Business Activity"
+                                oninput="changeCompanyInfo(event, 'business_activity')">
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <label class="col-4 col-form-label">Capital</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Capital"
+                                oninput="changeCompanyInfo(event, 'capital')">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 card m-2 p-2">
+                    <h5 class="display-3">Project Info</h5>
+
+
+
+
+                    <div class="row">
+                        <label class="col-3 col-form-label">Label</label>
+                        <div class="col">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-3 col-form-label">Label</label>
+                        <div class="col">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-3 col-form-label">Label</label>
+                        <div class="col">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-3 col-form-label">Label</label>
+                        <div class="col">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-3 col-form-label">Label</label>
+                        <div class="col">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-3 col-form-label">Label</label>
+                        <div class="col">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col card m-2 p-2">
+                    <h5 class="display-3">Payment schedule</h5>
+
+                    <div class="container" id="payment-form">
+
+
+
+
+
+
+
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="offset-10 col-2">
+                                <button class="btn btn-sm  btn-outline-dark" style="border-radius:100%; width:40px ;height:40px; " id="add-payment-btn">
+                                    <img src="./img/add_icon.png" alt="" style="width: 100%;height: 100%;">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row g-1 mt-5">
+                            <label class="col-2  col-form-label">
+                                <h4>Total :</h4>
+                            </label>
+                            <div class="col-3 mr-1">
+                                <input type="number" id="inputTotalAmount" min="0" class="form-control pr-0">
+                            </div>
+                            <label class="ml-2 col-1 col-form-label">SAR</label>
+                            <div class="col">
+                                <input type="number" min="0" class="form-control pr-0" id="inputTotalSar">
+                            </div>
+                            <label class="col-1 col-form-label">%</label>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            
+            </div>
+
+            <div class="container card p-2" id="container">
+
+                <h5 class="display-4 mb-2">Risk Analysis</h5>
+            </div>
     </form>
-    <div class="d-grid gap-2" style="position: fixed;bottom: 0;left : 0; right: 0; background-color: white; height: 4rem;
-box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
-        <button class="btn btn-primary" id="submit-btn"> Save</button>
-    </div>
-
+  
 
 
 
@@ -92,7 +263,7 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 file: "Project",
                 values: ["<=200,000", ">200,000=<500,000", ">500,000=<1,000,000", ">1000000=<3000000", ">3,000,000"],
                 scores: [7, 5.5, 4, 2.5, 1],
-                weightings  : [10,7.9,5.7,3.6,1.4]
+                weightings: [10, 7.9, 5.7, 3.6, 1.4]
             },
             {
                 option: "Type of the project",
@@ -101,14 +272,14 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 file: "Project",
                 values: ["Government", "Commerical", "Residental"],
                 scores: [5.25, 3.25, 1.15],
-                weightings : [7.5,4.6,1.6]
+                weightings: [7.5, 4.6, 1.6]
             },
             {
                 option: "Location of the project",
                 file: "Project",
                 values: ["<=50 km from Contrctor", ">50 km =<120 km from Contrctor", ">120 km from Contrctor"],
                 scores: [5.2, 3.25, 1.15],
-                weightings : [7.5,4.6,1.6]
+                weightings: [7.5, 4.6, 1.6]
             },
             {
                 option: "Timeline of the project",
@@ -117,7 +288,7 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 values: ["<=30 days", ">30 days =<60 days", ">60 days =<90 days", ">90 days =<120 days", ">120 days"],
 
                 scores: [17.5, 14.5, 11.5, 8.5, 5.5],
-                weightings : [25,20.7,16.4,12.1,7.9]
+                weightings: [25, 20.7, 16.4, 12.1, 7.9]
             },
             {
                 option: "*Client/GC/ Project's owner Type",
@@ -125,7 +296,7 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 file: "Project",
                 values: ["Commerical", "Residental", "Semi-Government", "Government", "Politician (VIP)"],
                 scores: [10.5, 8.5, 6.5, 4.5, 2.5],
-                weightings : [15,12.1,9.3,6.4,3.6]
+                weightings: [15, 12.1, 9.3, 6.4, 3.6]
             },
             {
                 option: "*Client/GC/ Project's owner Size",
@@ -133,7 +304,7 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 file: "Project",
                 values: ["Very Large", "Large", "Medium", "Small", "Micro-Small"],
                 scores: [10.5, 8.5, 6.5, 4.5, 2.5],
-                weightings : [15,12.1,9.3,6.4,3.6]
+                weightings: [15, 12.1, 9.3, 6.4, 3.6]
             },
             {
                 option: "*Client/GC/ Project's owner Reputation",
@@ -141,14 +312,14 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 file: "Project",
                 values: ["High or evident", "Strong", "Good", "Average or reducing", "Questionable or weak"],
                 scores: [14, 11, 7, 4, 1],
-                weightings : [20,15.7,10,5.7,1.4]
+                weightings: [20, 15.7, 10, 5.7, 1.4]
             },
             {
                 option: "Classification Certificate Grade",
                 values: ["1 or 2", "3 or 4", "5 or 6", "7", "Not applicable"],
                 file: "Business",
                 scores: [7.5, 6, 4.5, 3, 1.5],
-                weightings : [25,20,15,10,5]
+                weightings: [25, 20, 15, 10, 5]
             },
 
 
@@ -160,7 +331,7 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 values: ["More than 5 Years", "3-5 Years", "2-3 Years", "1-2 Years", "Less than 1 Year"],
 
                 scores: [10.5, 8.25, 6, 3.75, 1.5],
-                weightings : [35,27.5,20,12.5,5]
+                weightings: [35, 27.5, 20, 12.5, 5]
             },
             {
                 option: "Saudization/Commitment",
@@ -169,7 +340,7 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
                 file: "Business",
                 values: ["Excellent", "Green", "Not applicable (Mico-Small)", "Yellow", "Red"],
                 scores: [4.5, 3.75, 3, 2.25, 1.5],
-                weightings : [35,27.5,20,12.5,5]
+                weightings: [35, 27.5, 20, 12.5, 5]
             },
 
             {
@@ -181,7 +352,7 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
 
                 values: ["High or evident", "Strong", " Good", "Average or reducing", "Questionable or weak"],
                 scores: [7.5, 6, 4.5, 3, 1.5],
-                weightings : [25,20,15,10,5]
+                weightings: [25, 20, 15, 10, 5]
             },
 
 
@@ -279,25 +450,25 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
             cloned_col1.style.transition = "opacity 0.5s"
             col2.style.transition = "opacity 0.5s"
             col3.style.transition = "opacity 0.5s";
-/*
-            row.appendChild(cloned_col1)
-            row.appendChild(col2)
-            row.appendChild(col3)
-            setTimeout(() => {
-                cloned_col1.style.opacity = 1;
-                col2.style.opacity = 1;
-                col3.style.opacity = 1;
-
-                // col2.scrollIntoView()
-            }, 33)
-            */
+            /*
+                        row.appendChild(cloned_col1)
+                        row.appendChild(col2)
+                        row.appendChild(col3)
+                        setTimeout(() => {
+                            cloned_col1.style.opacity = 1;
+                            col2.style.opacity = 1;
+                            col3.style.opacity = 1;
+            
+                            // col2.scrollIntoView()
+                        }, 33)
+                        */
 
             final_data[i] = {
 
                 option_title: data[i].option,
                 option: value,
                 score: score,
-                weighting:weighting,
+                weighting: weighting,
 
 
 
@@ -307,13 +478,20 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
 
 
         }
-        document.getElementById("submit-btn").addEventListener("click", () => {
+        let companyInfo = {}
+        let totalAmount = 0;
+        let totalSar = 0;
+        document.getElementById("submit-btn").addEventListener("click", (e) => {
 
-            console.log(final_data)
+            e.preventDefault()
+
             const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
                 keyboard: false
             })
             myModal.show()
+
+
+
 
             pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
             window.jsPDF = window.jspdf.jsPDF;
@@ -322,32 +500,130 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
             const doc = new jsPDF();
             const iframe = document.createElement("iframe");
 
-            var columns = [{ content: "", colSpan: 3 }, { content: "Options" }, { content: "Risk score" }, { content: "Weighting %" }];
-            let rows = []
+            // table 1
+
+            let columns = [{
+                content: "Demographic Information", colSpan: 2, styles: {
+                    textColor: [255, 255, 255],
+                    fillColor: [68, 108, 207],
+                    minCellHeight: 15,
+                    fontSize: 12,
+                    valign: "center"
+                }
+            }]
+
+            let rows = [
+                ["Name", companyInfo.name || ""],
+                ["ID Number", companyInfo.id_number || ""],
+                ["Issuer", companyInfo.issuer || ""],
+                ["City", companyInfo.city || ""],
+                ["ID Expiry Date", companyInfo.id_expiry_date || ""],
+                ["Legal type", companyInfo.legal_type || ""],
+                ["Date Established", companyInfo.date_established || ""],
+                ["Business Activity", companyInfo.business_activity || ""],
+                ["Capital", companyInfo.capital || ""]
+            ]
+
+
+            doc.autoTable({
+
+
+                head: [columns],
+                body: rows
+            });
+
+
+            //table 2
+
+
+            columns = ["N", "Amount", "SAR", "Estimated Date"]
+            rows = []
+            paymentData.map(data => {
+                rows.push([
+                    data.id,
+                    data.amount,
+                    data.sar,
+                    data.date
+                ])
+            })
+
+
+            rows.push([{
+
+                content: "Total : ",
+                styles: {
+                    textColor: [255, 255, 255],
+                    fillColor: [68, 108, 207],
+
+                    fontSize: 12,
+                    valign: "center",
+                    halign: "midlle"
+                }
+            }, {
+                content: totalAmount,
+                styles: {
+                    textColor: [255, 255, 255],
+                    fillColor: [68, 108, 207],
+
+                    fontSize: 10,
+                    valign: "center",
+                    halign: "midlle"
+                }
+            }, {
+                content: totalSar,
+                styles: {
+                    textColor: [255, 255, 255],
+                    fillColor: [68, 108, 207],
+
+                    fontSize: 12,
+                    valign: "center",
+                    halign: "midlle"
+                }
+            }, {
+                content: "",
+                styles: {
+                    textColor: [255, 255, 255],
+                    fillColor: [68, 108, 207],
+
+
+                }
+            }])
+            doc.autoTable({
+
+
+                head: [columns],
+                body: rows
+            });
+
+
+
+
+            columns = [{ content: "", colSpan: 3 }, { content: "Options" }, { content: "Risk score" }, { content: "Weighting %" }];
+            rows = []
 
 
             let totale_score = 0;
             let totale_weighting = 0;
             final_data.map(data => {
-                let row = ["", "" , {
+                let row = ["", "", {
                     content: data.option_title
-                },   data.option , data.weighting, data.score ]
-               
-            
-                totale_score+=Number.parseFloat(data.score);
-                totale_weighting+=Number.parseFloat(data.weighting);
+                }, data.option, data.weighting, data.score]
 
-              
+
+                totale_score += Number.parseFloat(data.score);
+                totale_weighting += Number.parseFloat(data.weighting);
+
+
                 rows.push(row)
 
             })
-         
+
 
             rows.push([{
-                content : "Total",
-                colSpan  : 2,
-                styles: {  fontSize:10, valign: "middle", halign : "middle" }
-            } ,  "", "", totale_weighting,totale_score])
+                content: "Total",
+                colSpan: 2,
+                styles: { fontSize: 10, valign: "middle", halign: "middle" }
+            }, "", "", totale_weighting, totale_score])
 
             doc.autoTable({
 
@@ -368,6 +644,89 @@ box-shadow: -1px -1px 4px gray;padding: 0.5rem;">
             document.getElementById("myPdf").innerHTML = iframe.outerHTML
 
         })
+
+        let paymentData = []
+
+        addPaymentForm()
+        calculTotalPayment()
+        function addPaymentForm() {
+            const data = {
+                id: paymentData.length + 1,
+                date: "",
+                sar: 0,
+                amount: 0,
+            }
+
+            let str = `
+            
+            <div class="row g-1">
+                            <label class="col-1 col-form-label ">#${data.id}</label>
+                            <div class="col-2">
+                                <input type="number" class="form-control" min="0" oninput="changePayment(event, ${data.id}, 'amount')"  value="${data.amount}">
+                            </div>
+                            <label  class="col-1 col-form-label">SAR</label>
+                            <div class="col-2">
+                                <input type="number" class="form-control" min="0" oninput="changePayment(event, ${data.id}, 'sar')" value="${data.sar}">
+                            </div>
+    
+                            <label  class="col-1 col-form-label">%</label>
+                            <div class="col-5">
+                                <input type="text" class="form-control form-control-date datepicker-inline"  value="${data.date}" oninput="changePayment(event, ${data.id} ,  'date')" placeholder="Estimeted date" >
+                            </div>
+                        </div>` ;
+
+            document.getElementById("payment-form").insertAdjacentHTML('beforeend', str);
+            paymentData.push(data)
+        }
+
+        document.getElementById("add-payment-btn").addEventListener("click", (e) => {
+            e.preventDefault()
+            addPaymentForm()
+
+        })
+
+
+        function changePayment(event, id, input) {
+
+            switch (input) {
+                case "amount":
+                    paymentData[id - 1].amount = Number.parseFloat(event.target.value);
+                    break;
+
+                case "sar":
+                    paymentData[id - 1].sar = Number.parseFloat(event.target.value);
+                    break;
+
+
+                case "date":
+                    paymentData[id - 1].date = event.target.value;
+                    break;
+                default:
+                    break;
+            }
+
+            console.log(paymentData)
+            calculTotalPayment()
+
+        }
+        function calculTotalPayment() {
+            totalAmount = 0;
+            totalSar = 0;
+            paymentData.map(data => {
+                totalAmount += data.amount;
+                totalSar += data.sar
+            })
+
+            document.getElementById("inputTotalAmount").value = totalAmount;
+            document.getElementById("inputTotalSar").value = totalSar;
+        }
+
+
+        function changeCompanyInfo(event, input) {
+
+            companyInfo[input] = event.target.value
+            console.log(companyInfo)
+        }
     </script>
 
 
