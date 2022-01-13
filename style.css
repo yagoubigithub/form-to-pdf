@@ -33,4 +33,13 @@ nav{
     justify-content: flex-end;
     align-items: center;
     padding: 5px;
+    box-shadow: 0 0 5px  gray;
+}
+
+form .btn{
+    font-weight: 900;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

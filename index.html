@@ -27,6 +27,11 @@
     <script src="./pdfjs/build/pdf.js"></script>
     <script src="./pdfjs/build/pdf.worker.js"></script>
 
+    <script>
+    function doNothin(event) {
+        event.preventDefault()
+    }
+        </script>
 
     <link rel="stylesheet" href="style.css">
     <title>Form</title>
@@ -40,7 +45,7 @@
 </nav>
 
 
-    <form style="padding-bottom: 7rem;">
+    <form style="padding-bottom: 7rem;" onsubmit="doNothin(event)">
         <div class="container-fluid" >
             <div class="row">
                 <div class="col-4 card m-2 p-2">
@@ -182,9 +187,9 @@
 
                     </div>
                     <div class="container">
-                        <div class="row">
+                        <div class="row g-1">
                             <div class="offset-10 col-2">
-                                <button class="btn btn-sm  btn-outline-dark" style="border-radius:100%; width:40px ;height:40px; " id="add-payment-btn">
+                                <button type="button" class="btn btn-sm  btn-outline-dark" style="border-radius:100%; width:40px ;height:40px; " id="add-payment-btn">
                                     <img src="./img/add_icon.png" alt="" style="width: 100%;height: 100%;">
                                 </button>
                             </div>
@@ -221,9 +226,7 @@
     </form>
   
 
-
-
-    <!-- Modal -->
+    <!-- PDF Model -->
     <div class="modal fade modal-fullscreen-sm-down modal-fullscreen " id="myModal" data-bs-backdrop="static"
         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-sm-down modal-fullscreen">
@@ -254,480 +257,15 @@
 
 
 
+        <script src="./data/risk_analisis_data.js"></script>
+        <script src="./functions/risk_analisis.js"></script>
+        <script src="./functions/companyInfo.js"></script>
+        <script src="./functions/projectInfo.js"></script>
+        <script src="./functions/payment_schedule.js"></script>
+        <script src="./functions/events.js"></script>
 
-    <script>
-        const data = [
-            {
-                option: "Value of the project",
 
-                file: "Project",
-                values: ["<=200,000", ">200,000=<500,000", ">500,000=<1,000,000", ">1000000=<3000000", ">3,000,000"],
-                scores: [7, 5.5, 4, 2.5, 1],
-                weightings: [10, 7.9, 5.7, 3.6, 1.4]
-            },
-            {
-                option: "Type of the project",
-
-
-                file: "Project",
-                values: ["Government", "Commerical", "Residental"],
-                scores: [5.25, 3.25, 1.15],
-                weightings: [7.5, 4.6, 1.6]
-            },
-            {
-                option: "Location of the project",
-                file: "Project",
-                values: ["<=50 km from Contrctor", ">50 km =<120 km from Contrctor", ">120 km from Contrctor"],
-                scores: [5.2, 3.25, 1.15],
-                weightings: [7.5, 4.6, 1.6]
-            },
-            {
-                option: "Timeline of the project",
-
-                file: "Project",
-                values: ["<=30 days", ">30 days =<60 days", ">60 days =<90 days", ">90 days =<120 days", ">120 days"],
-
-                scores: [17.5, 14.5, 11.5, 8.5, 5.5],
-                weightings: [25, 20.7, 16.4, 12.1, 7.9]
-            },
-            {
-                option: "*Client/GC/ Project's owner Type",
-
-                file: "Project",
-                values: ["Commerical", "Residental", "Semi-Government", "Government", "Politician (VIP)"],
-                scores: [10.5, 8.5, 6.5, 4.5, 2.5],
-                weightings: [15, 12.1, 9.3, 6.4, 3.6]
-            },
-            {
-                option: "*Client/GC/ Project's owner Size",
-
-                file: "Project",
-                values: ["Very Large", "Large", "Medium", "Small", "Micro-Small"],
-                scores: [10.5, 8.5, 6.5, 4.5, 2.5],
-                weightings: [15, 12.1, 9.3, 6.4, 3.6]
-            },
-            {
-                option: "*Client/GC/ Project's owner Reputation",
-
-                file: "Project",
-                values: ["High or evident", "Strong", "Good", "Average or reducing", "Questionable or weak"],
-                scores: [14, 11, 7, 4, 1],
-                weightings: [20, 15.7, 10, 5.7, 1.4]
-            },
-            {
-                option: "Classification Certificate Grade",
-                values: ["1 or 2", "3 or 4", "5 or 6", "7", "Not applicable"],
-                file: "Business",
-                scores: [7.5, 6, 4.5, 3, 1.5],
-                weightings: [25, 20, 15, 10, 5]
-            },
-
-
-            {
-                option: "Experience in the field",
-
-
-                file: "Business",
-                values: ["More than 5 Years", "3-5 Years", "2-3 Years", "1-2 Years", "Less than 1 Year"],
-
-                scores: [10.5, 8.25, 6, 3.75, 1.5],
-                weightings: [35, 27.5, 20, 12.5, 5]
-            },
-            {
-                option: "Saudization/Commitment",
-
-
-                file: "Business",
-                values: ["Excellent", "Green", "Not applicable (Mico-Small)", "Yellow", "Red"],
-                scores: [4.5, 3.75, 3, 2.25, 1.5],
-                weightings: [35, 27.5, 20, 12.5, 5]
-            },
-
-            {
-                option: "Quality of management",
-
-
-                file: "Business",
-
-
-                values: ["High or evident", "Strong", " Good", "Average or reducing", "Questionable or weak"],
-                scores: [7.5, 6, 4.5, 3, 1.5],
-                weightings: [25, 20, 15, 10, 5]
-            },
-
-
-
-        ];
-        for (let i = 0; i < data.length; i++) {
-            const element = data[i];
-
-            const row = document.createElement("div");
-            row.className = "row";
-            row.id = "row-" + i
-            row.innerHTML = `<div  class="col-6">${element.option}</div>
-            
-            <div  class="col-3">Risk Weighting</div>
-            <div  class="col-3">Score</div>
-            `
-
-            const col1 = document.createElement("div");
-            col1.className = "col-6"
-            // col1.innerHTML = `<label class="form-label">${element.option}</label>`
-
-            const select = document.createElement("select")
-            select.className = "form-select";
-            select.innerHTML = "<option>--Select--</select>";
-
-            select.onchange = (event) => handleSelectChange(event, i, 0)
-            element.values.forEach((value, index) => {
-
-                const option = document.createElement("option")
-                option.value = value;
-                option.innerText = value;
-                select.appendChild(option)
-            });
-
-            col1.appendChild(select)
-            const col2 = document.createElement("div");
-            col2.className = "col-3 col2";
-
-
-
-
-            const col3 = document.createElement("div");
-            col3.className = "col-3 col3";
-
-
-            row.append
-                (col1, col2, col3)
-            document.getElementById("container").appendChild(row)
-        }
-
-        let final_data = []
-
-        function handleSelectChange(event, i, colIndex) {
-            const value = event.target.value;
-            const col1 = event.target.parentNode || event.target.parentElement;
-
-
-
-
-            const row = col1.parentNode || col1.parentElement
-
-            const old_col2 = row.getElementsByClassName("col2")[colIndex]
-            const old_col3 = row.getElementsByClassName("col3")[colIndex]
-
-
-
-            const weighting = data[i].weightings[data[i].values.indexOf(value)]
-            old_col2.innerHTML = ` ${weighting} `
-
-
-            const score = data[i].scores[data[i].values.indexOf(value)]
-            old_col3.innerHTML = ` ${score} `
-
-
-            const col2 = document.createElement("div");
-            col2.className = "col-3 col2";
-
-            const col3 = document.createElement("div");
-            col3.className = "col-3 col3";
-
-
-            const cloned_col1 = col1.cloneNode(true);
-            const newColIndex = colIndex + 1
-
-
-            cloned_col1.getElementsByTagName("select")[0].addEventListener("change", (event) => {
-
-                handleSelectChange(event, i, newColIndex)
-            })
-
-            cloned_col1.style.opacity = 0;
-            col2.style.opacity = 0;
-            col3.style.opacity = 0;
-
-            cloned_col1.style.transition = "opacity 0.5s"
-            col2.style.transition = "opacity 0.5s"
-            col3.style.transition = "opacity 0.5s";
-            /*
-                        row.appendChild(cloned_col1)
-                        row.appendChild(col2)
-                        row.appendChild(col3)
-                        setTimeout(() => {
-                            cloned_col1.style.opacity = 1;
-                            col2.style.opacity = 1;
-                            col3.style.opacity = 1;
-            
-                            // col2.scrollIntoView()
-                        }, 33)
-                        */
-
-            final_data[i] = {
-
-                option_title: data[i].option,
-                option: value,
-                score: score,
-                weighting: weighting,
-
-
-
-            }
-
-
-
-
-        }
-        let companyInfo = {}
-        let totalAmount = 0;
-        let totalSar = 0;
-        document.getElementById("submit-btn").addEventListener("click", (e) => {
-
-            e.preventDefault()
-
-            const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
-                keyboard: false
-            })
-            myModal.show()
-
-
-
-
-            pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-            window.jsPDF = window.jspdf.jsPDF;
-
-            //   window.jsPDF = window.jspdf.jsPDF;
-            const doc = new jsPDF();
-            const iframe = document.createElement("iframe");
-
-            // table 1
-
-            let columns = [{
-                content: "Demographic Information", colSpan: 2, styles: {
-                    textColor: [255, 255, 255],
-                    fillColor: [68, 108, 207],
-                    minCellHeight: 15,
-                    fontSize: 12,
-                    valign: "center"
-                }
-            }]
-
-            let rows = [
-                ["Name", companyInfo.name || ""],
-                ["ID Number", companyInfo.id_number || ""],
-                ["Issuer", companyInfo.issuer || ""],
-                ["City", companyInfo.city || ""],
-                ["ID Expiry Date", companyInfo.id_expiry_date || ""],
-                ["Legal type", companyInfo.legal_type || ""],
-                ["Date Established", companyInfo.date_established || ""],
-                ["Business Activity", companyInfo.business_activity || ""],
-                ["Capital", companyInfo.capital || ""]
-            ]
-
-
-            doc.autoTable({
-
-
-                head: [columns],
-                body: rows
-            });
-
-
-            //table 2
-
-
-            columns = ["N", "Amount", "SAR", "Estimated Date"]
-            rows = []
-            paymentData.map(data => {
-                rows.push([
-                    data.id,
-                    data.amount,
-                    data.sar,
-                    data.date
-                ])
-            })
-
-
-            rows.push([{
-
-                content: "Total : ",
-                styles: {
-                    textColor: [255, 255, 255],
-                    fillColor: [68, 108, 207],
-
-                    fontSize: 12,
-                    valign: "center",
-                    halign: "midlle"
-                }
-            }, {
-                content: totalAmount,
-                styles: {
-                    textColor: [255, 255, 255],
-                    fillColor: [68, 108, 207],
-
-                    fontSize: 10,
-                    valign: "center",
-                    halign: "midlle"
-                }
-            }, {
-                content: totalSar,
-                styles: {
-                    textColor: [255, 255, 255],
-                    fillColor: [68, 108, 207],
-
-                    fontSize: 12,
-                    valign: "center",
-                    halign: "midlle"
-                }
-            }, {
-                content: "",
-                styles: {
-                    textColor: [255, 255, 255],
-                    fillColor: [68, 108, 207],
-
-
-                }
-            }])
-            doc.autoTable({
-
-
-                head: [columns],
-                body: rows
-            });
-
-
-
-
-            columns = [{ content: "", colSpan: 3 }, { content: "Options" }, { content: "Risk score" }, { content: "Weighting %" }];
-            rows = []
-
-
-            let totale_score = 0;
-            let totale_weighting = 0;
-            final_data.map(data => {
-                let row = ["", "", {
-                    content: data.option_title
-                }, data.option, data.weighting, data.score]
-
-
-                totale_score += Number.parseFloat(data.score);
-                totale_weighting += Number.parseFloat(data.weighting);
-
-
-                rows.push(row)
-
-            })
-
-
-            rows.push([{
-                content: "Total",
-                colSpan: 2,
-                styles: { fontSize: 10, valign: "middle", halign: "middle" }
-            }, "", "", totale_weighting, totale_score])
-
-            doc.autoTable({
-
-
-                head: [columns],
-                body: rows,
-                styles: { overflow: 'linebreak', cellPadding: 1, fontSize: 7, valign: "middle" },
-                theme: "grid"
-            });
-            const blob = doc.output();
-
-            const myblob = new Blob([blob], { type: 'application/javascript' });
-            var url = URL.createObjectURL(myblob);
-            var viewerUrl = './pdfjs/web/viewer.html?file=' + encodeURIComponent(url);
-
-
-            iframe.src = viewerUrl;
-            document.getElementById("myPdf").innerHTML = iframe.outerHTML
-
-        })
-
-        let paymentData = []
-
-        addPaymentForm()
-        calculTotalPayment()
-        function addPaymentForm() {
-            const data = {
-                id: paymentData.length + 1,
-                date: "",
-                sar: 0,
-                amount: 0,
-            }
-
-            let str = `
-            
-            <div class="row g-1">
-                            <label class="col-1 col-form-label ">#${data.id}</label>
-                            <div class="col-2">
-                                <input type="number" class="form-control" min="0" oninput="changePayment(event, ${data.id}, 'amount')"  value="${data.amount}">
-                            </div>
-                            <label  class="col-1 col-form-label">SAR</label>
-                            <div class="col-2">
-                                <input type="number" class="form-control" min="0" oninput="changePayment(event, ${data.id}, 'sar')" value="${data.sar}">
-                            </div>
     
-                            <label  class="col-1 col-form-label">%</label>
-                            <div class="col-5">
-                                <input type="text" class="form-control form-control-date datepicker-inline"  value="${data.date}" oninput="changePayment(event, ${data.id} ,  'date')" placeholder="Estimeted date" >
-                            </div>
-                        </div>` ;
-
-            document.getElementById("payment-form").insertAdjacentHTML('beforeend', str);
-            paymentData.push(data)
-        }
-
-        document.getElementById("add-payment-btn").addEventListener("click", (e) => {
-            e.preventDefault()
-            addPaymentForm()
-
-        })
-
-
-        function changePayment(event, id, input) {
-
-            switch (input) {
-                case "amount":
-                    paymentData[id - 1].amount = Number.parseFloat(event.target.value);
-                    break;
-
-                case "sar":
-                    paymentData[id - 1].sar = Number.parseFloat(event.target.value);
-                    break;
-
-
-                case "date":
-                    paymentData[id - 1].date = event.target.value;
-                    break;
-                default:
-                    break;
-            }
-
-            console.log(paymentData)
-            calculTotalPayment()
-
-        }
-        function calculTotalPayment() {
-            totalAmount = 0;
-            totalSar = 0;
-            paymentData.map(data => {
-                totalAmount += data.amount;
-                totalSar += data.sar
-            })
-
-            document.getElementById("inputTotalAmount").value = totalAmount;
-            document.getElementById("inputTotalSar").value = totalSar;
-        }
-
-
-        function changeCompanyInfo(event, input) {
-
-            companyInfo[input] = event.target.value
-            console.log(companyInfo)
-        }
-    </script>
 
 
 </body>
