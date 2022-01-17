@@ -24,6 +24,7 @@
             showCompanyInfo(doc)
 
             //table 2
+            showProjectInfo(doc)
 
 
          
